@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server';
 import { GitHubService } from '@/lib/github/github.service';
 import { AuthService } from '@/lib/auth/auth.service';
 
+// Export to make the route dynamic
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   try {
     const token = request.headers.get('authorization')?.split(' ')[1];
