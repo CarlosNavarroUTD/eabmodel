@@ -13,6 +13,8 @@ RUN npm ci
 # Copiar el resto de los archivos
 COPY . .
 
+RUN npx prisma generate
+
 # Crear archivo .env.local si es necesario para la compilación
 RUN touch .env.local
 
