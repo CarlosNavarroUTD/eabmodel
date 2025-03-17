@@ -87,7 +87,7 @@ export class AuthService {
       }
 
       return user;
-    } catch (error) {
+    } catch {
       throw new Error('Invalid token');
     }
   }

@@ -15,8 +15,11 @@ export async function GET(request: Request) {
     const repositories = await GitHubService.getRepositories(user.id);
 
     return NextResponse.json({ repositories });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Repository fetch error:', error);
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ error: 'An unknown error occurred' }, { status: 400 });
   }
 }

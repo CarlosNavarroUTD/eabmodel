@@ -55,8 +55,12 @@ const RegisterPage = () => {
         
         // Redirigir al dashboard o página principal
         router.push('/');
-      } catch (err: any) {
+      } catch (err: unknown) {
+        if (err instanceof Error) {
         setError(err.message);
+        } else {
+        setError('An unknown error occurred');
+        }
       } finally {
         setLoading(false);
       }

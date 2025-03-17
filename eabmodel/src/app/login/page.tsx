@@ -55,9 +55,13 @@ const LoginPage = () => {
         router.push('/dashboard');
         // Si lo anterior no funciona, prueba con:
         // window.location.href = '/dashboard';
-      } catch (err: any) {
+      } catch (err: unknown) {
+        if (err instanceof Error) {
         console.error('Error durante el login:', err);
         setError(err.message);
+        } else {
+        setError('An unknown error occurred');
+        }
       } finally {
         setLoading(false);
       }

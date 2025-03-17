@@ -41,7 +41,7 @@ export function useAuth() {
       } else {
         localStorage.removeItem('token');
       }
-    } catch (error) {
+    } catch {
       localStorage.removeItem('token');
     } finally {
       setLoading(false);

@@ -1,6 +1,5 @@
-// src/app/dashboard/github-integration/page.tsx
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 
@@ -11,51 +10,7 @@ export default function GitHubIntegration() {
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    // Establecer el path actual
-    setCurrentPath(window.location.pathname);
-
-    // Manejar el código de GitHub si existe
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const error = urlParams.get('error');
-
-    if (error) {
-      setError('GitHub authorization was denied');
-      return;
-    }
-
-    if (code) {
-      console.log('Received GitHub code:', code);
-      linkGitHubAccount(code);
-    }
-  }, []);
-
-  const handleGitHubLogin = () => {
-    const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
-    
-    if (!clientId) {
-      setError('GitHub Client ID is not configured');
-      console.error('Missing NEXT_PUBLIC_GITHUB_CLIENT_ID environment variable');
-      return;
-    }
-
-    // Usar el pathname actual para construir la URL de redirección
-    const redirectUri = `${window.location.origin}${pathname}`;
-    
-    const params = new URLSearchParams({
-      client_id: clientId,
-      redirect_uri: redirectUri,
-      scope: 'repo user',
-      state: generateUUID()
-    });
-
-    console.log('Redirecting to GitHub with redirect URI:', redirectUri);
-    const githubUrl = `https://github.com/login/oauth/authorize?${params.toString()}`;
-    window.location.href = githubUrl;
-  };
-
-  const linkGitHubAccount = async (code: string) => {
+  const linkGitHubAccount = useCallback(async (code: string) => {
     try {
       setIsLoading(true);
       setError('');
@@ -85,12 +40,60 @@ export default function GitHubIntegration() {
 
       console.log('GitHub account linked successfully');
       router.push('/dashboard/profile');
-    } catch (err: any) {
-      console.error('Error linking GitHub account:', err);
-      setError(err.message || 'An error occurred while linking your GitHub account');
+    } catch (error: unknown) {
+      console.error('Error linking GitHub account:', error);
+      if (error instanceof Error) {
+        setError(error.message || 'An error occurred while linking your GitHub account');
+      } else {
+        setError('An unknown error occurred while linking your GitHub account');
+      }
     } finally {
       setIsLoading(false);
     }
+  }, [router]); // Include router in dependencies since it's used inside the function
+
+  useEffect(() => {
+    // Establecer el path actual
+    setCurrentPath(window.location.pathname);
+
+    // Manejar el código de GitHub si existe
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const errorParam = urlParams.get('error');
+
+    if (errorParam) {
+      setError('GitHub authorization was denied');
+      return;
+    }
+
+    if (code) {
+      console.log('Received GitHub code:', code);
+      linkGitHubAccount(code);
+    }
+  }, [linkGitHubAccount]); // Now this dependency won't change on every render
+
+  const handleGitHubLogin = () => {
+    const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
+    
+    if (!clientId) {
+      setError('GitHub Client ID is not configured');
+      console.error('Missing NEXT_PUBLIC_GITHUB_CLIENT_ID environment variable');
+      return;
+    }
+
+    // Usar el pathname actual para construir la URL de redirección
+    const redirectUri = `${window.location.origin}${pathname}`;
+    
+    const params = new URLSearchParams({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      scope: 'repo user',
+      state: generateUUID()
+    });
+
+    console.log('Redirecting to GitHub with redirect URI:', redirectUri);
+    const githubUrl = `https://github.com/login/oauth/authorize?${params.toString()}`;
+    window.location.href = githubUrl;
   };
 
   const generateUUID = () => {
@@ -109,7 +112,7 @@ export default function GitHubIntegration() {
         <h2 className="text-xl font-semibold mb-4">Instructions</h2>
         <ol className="list-decimal pl-6 space-y-2">
           <li>Make sure you have a GitHub account</li>
-          <li>Click the "Connect with GitHub" button below</li>
+          <li>Click the &quot;Connect with GitHub&quot; button below</li>
           <li>Authorize the application on GitHub</li>
           <li>Your repositories will be automatically synchronized</li>
         </ol>

@@ -51,25 +51,25 @@ export class GitHubService {
 
       // Crear o actualizar repositorios
       const repositories = await Promise.all(
-        reposResponse.data.map(async (repo: any) => {
+        reposResponse.data.map(async (repo: { id: number; name: string; description: string; html_url: string; private: boolean }) => {
           return prisma.repository.upsert({
-            where: {
-              id: repo.id.toString()
-            },
-            create: {
-              id: repo.id.toString(),
-              name: repo.name,
-              description: repo.description,
-              url: repo.html_url,
-              isPublic: !repo.private,
-              githubAccountId: githubAccount.id,
-            },
-            update: {
-              name: repo.name,
-              description: repo.description,
-              url: repo.html_url,
-              isPublic: !repo.private,
-            },
+        where: {
+          id: repo.id.toString()
+        },
+        create: {
+          id: repo.id.toString(),
+          name: repo.name,
+          description: repo.description,
+          url: repo.html_url,
+          isPublic: !repo.private,
+          githubAccountId: githubAccount.id,
+        },
+        update: {
+          name: repo.name,
+          description: repo.description,
+          url: repo.html_url,
+          isPublic: !repo.private,
+        },
           });
         })
       );
@@ -110,25 +110,25 @@ export class GitHubService {
 
       // Actualizar repositorios en la base de datos
       const updatedRepos = await Promise.all(
-        response.data.map(async (repo: any) => {
+        response.data.map(async (repo: { id: number; name: string; description: string; html_url: string; private: boolean }) => {
           return prisma.repository.upsert({
-            where: {
-              id: repo.id.toString()
-            },
-            create: {
-              id: repo.id.toString(),
-              name: repo.name,
-              description: repo.description,
-              url: repo.html_url,
-              isPublic: !repo.private,
-              githubAccountId: githubAccount.id,
-            },
-            update: {
-              name: repo.name,
-              description: repo.description,
-              url: repo.html_url,
-              isPublic: !repo.private,
-            },
+        where: {
+          id: repo.id.toString()
+        },
+        create: {
+          id: repo.id.toString(),
+          name: repo.name,
+          description: repo.description,
+          url: repo.html_url,
+          isPublic: !repo.private,
+          githubAccountId: githubAccount.id,
+        },
+        update: {
+          name: repo.name,
+          description: repo.description,
+          url: repo.html_url,
+          isPublic: !repo.private,
+        },
           });
         })
       );

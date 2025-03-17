@@ -1,9 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 
+// Instead of using namespace, declare the type directly
 declare global {
-  var prisma: PrismaClient | undefined
+  // Change var to let in the global declaration
+  let prisma: PrismaClient | undefined
 }
 
-export const prisma = global.prisma || new PrismaClient()
+// Use const instead of var
+const globalForPrisma = global as { prisma?: PrismaClient }
 
-if (process.env.NODE_ENV !== 'production') global.prisma = prisma
+export const prisma = globalForPrisma.prisma || new PrismaClient()
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import AnimatedLogo from '@/components/animated-logo'
 
 export default function Home() {
   return (

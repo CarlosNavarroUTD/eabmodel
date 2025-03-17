@@ -41,7 +41,11 @@ export async function GET(request: Request) {
       },
       githubAccount: userWithGithub.githubAccount || null
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 401 });
+  } catch (error: unknown) {
+    console.error('Repository fetch error:', error);
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+    return NextResponse.json({ error: 'An unknown error occurred' }, { status: 400 });
   }
 }
