@@ -1,4 +1,3 @@
-// src/app/register/page.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -90,7 +89,7 @@ const RegisterPage = () => {
                   placeholder="Correo electrónico"
                   value={formData.email}
                   onChange={handleChange}
-                  className="bg-background/50 border-secondary text-white"
+                  className="bg-background/50 border-secondary text-white form-input"
                   required
                 />
               </div>
@@ -101,7 +100,7 @@ const RegisterPage = () => {
                   placeholder="Contraseña"
                   value={formData.password}
                   onChange={handleChange}
-                  className="bg-background/50 border-secondary text-white"
+                  className="bg-background/50 border-secondary text-white form-input"
                   required
                 />
               </div>
@@ -112,7 +111,7 @@ const RegisterPage = () => {
                   placeholder="Nombre completo"
                   value={formData.name}
                   onChange={handleChange}
-                  className="bg-background/50 border-secondary text-white"
+                  className="bg-background/50 border-secondary text-white form-input"
                   required
                 />
               </div>
@@ -123,7 +122,7 @@ const RegisterPage = () => {
                   placeholder="Teléfono"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="bg-background/50 border-secondary text-white"
+                  className="bg-background/50 border-secondary text-white form-input"
                 />
               </div>
               <div className="space-y-2">
@@ -133,7 +132,7 @@ const RegisterPage = () => {
                   placeholder="Cargo"
                   value={formData.position}
                   onChange={handleChange}
-                  className="bg-background/50 border-secondary text-white"
+                  className="bg-background/50 border-secondary text-white form-input"
                 />
               </div>
               

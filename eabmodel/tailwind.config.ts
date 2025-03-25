@@ -51,20 +51,23 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
-  		fontFamily: {
-  			bryndan: [
-  				'Bryndan Write',
-  				'sans-serif'
-  			],
-  			codecCold: [
-  				'Codec Cold',
-  				'sans-serif'
-  			],
-  			codecWarm: [
-  				'Codec Warm',
-  				'sans-serif'
-  			]
-  		},
+		  fontFamily: {
+			bryndan: [
+			  'Bryndan Write',
+			  'Arial',
+			  'sans-serif'
+			],
+			codecCold: [
+			  'Codec Cold',
+			  'Arial',
+			  'sans-serif'
+			],
+			codecWarm: [
+			  'Codec Warm',
+			  'Arial',
+			  'sans-serif'
+			]
+		  },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

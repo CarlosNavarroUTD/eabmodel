@@ -91,7 +91,7 @@ const LoginPage = () => {
                   placeholder="Correo electrónico"
                   value={formData.email}
                   onChange={handleChange}
-                  className="bg-background/50 border-secondary text-white"
+                  className="bg-background/50 border-secondary text-white form-input"
                   required
                 />
               </div>
@@ -102,7 +102,7 @@ const LoginPage = () => {
                   placeholder="Contraseña"
                   value={formData.password}
                   onChange={handleChange}
-                  className="bg-background/50 border-secondary text-white"
+                  className="bg-black border-secondary text-white form-input"
                   required
                 />
               </div>

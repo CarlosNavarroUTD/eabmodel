@@ -1,4 +1,4 @@
-import { hash, compare } from 'bcrypt';
+import { hash, compare } from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
 import { prisma } from '../prisma/client';
 import { UserRegistrationData, UserLoginData } from './types';
@@ -20,7 +20,8 @@ export class AuthService {
     const user = await prisma.user.create({
       data: {
         ...data,
-        password: hashedPassword
+        password: hashedPassword,
+        role: data.role || 'USER' // Por defecto, asignar rol USER
       },
       select: {
         id: true,
@@ -28,11 +29,12 @@ export class AuthService {
         name: true,
         phone: true,
         position: true,
-        image: true
+        image: true,
+        role: true
       }
     });
 
-    const token = sign({ userId: user.id }, JWT_SECRET, { expiresIn: '24h' });
+    const token = sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
 
     return { user, token };
   }
@@ -52,7 +54,7 @@ export class AuthService {
       throw new Error('Invalid credentials');
     }
 
-    const token = sign({ userId: user.id }, JWT_SECRET, { expiresIn: '24h' });
+    const token = sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
 
     return {
       user: {
@@ -61,7 +63,8 @@ export class AuthService {
         name: user.name,
         phone: user.phone,
         position: user.position,
-        image: user.image
+        image: user.image,
+        role: user.role
       },
       token
     };
@@ -69,7 +72,7 @@ export class AuthService {
 
   static async validateToken(token: string) {
     try {
-      const decoded = verify(token, JWT_SECRET) as { userId: string };
+      const decoded = verify(token, JWT_SECRET) as { userId: string, role: string };
       const user = await prisma.user.findUnique({
         where: { id: decoded.userId },
         select: {
@@ -78,7 +81,8 @@ export class AuthService {
           name: true,
           phone: true,
           position: true,
-          image: true
+          image: true,
+          role: true
         }
       });
 
@@ -92,4 +96,3 @@ export class AuthService {
     }
   }
 }
-

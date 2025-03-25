@@ -16,8 +16,14 @@ model User {
   position      String?
   image         String?
   githubAccount GithubAccount?
+  role          Role           @default(USER)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
 }
 
 model GithubAccount {

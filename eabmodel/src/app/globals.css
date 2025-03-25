@@ -59,17 +59,15 @@ body {
 }
 
 
-@font-face {
-  font-family: 'Bryndan Write';
-  src: url('/fonts/bryndan-write-font/BryndanWriteBook-nGPM.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+
+
 
 @layer base {
   body {
-    font-family: 'Bryndan Write', sans-serif;
-    
+    font-family: 'Codec Cold', 'Arial', sans-serif;
+  }
+  .form-input {
+    font-family: Arial, sans-serif !important;
   }
   :root {
     --background: 0 0% 100%;
@@ -125,6 +123,14 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+/*My own fonts*/
+@font-face {
+  font-family: 'Bryndan Write';
+  src: url('/fonts/bryndan-write-font/BryndanWriteBook-nGPM.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 /* Codec Cold */
 @font-face {
