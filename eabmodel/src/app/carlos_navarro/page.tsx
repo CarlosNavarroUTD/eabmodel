@@ -63,7 +63,7 @@ const Portfolio = () => {
         window.open(`mailto:${value}`, '_blank');
         break;
       case 'linkedin':
-        window.open('https://www.linkedin.com/in/carlos-jair-navarro-huerta/', '_blank');
+        window.open('https://www.linkedin.com/in/carlos-navarro-huerta-350b13243', '_blank');
         break;
       default:
         break;
