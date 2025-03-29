@@ -13,9 +13,7 @@
   --radius: 0.5rem;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
+
 
 @keyframes spin {
   from {
@@ -65,6 +63,9 @@ body {
 @layer base {
   body {
     font-family: 'Codec Cold', 'Arial', sans-serif;
+  }
+  .numbers-font {
+    font-family: Arial, sans-serif !important;
   }
   .form-input {
     font-family: Arial, sans-serif !important;

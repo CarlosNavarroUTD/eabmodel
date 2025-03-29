@@ -174,7 +174,7 @@ export default function Contacto() {
                     <div>
                       <h3 className="font-bold">Correo electrónico</h3>
                       <a href="mailto:info@eabmodel.com" className="text-gray-300 hover:text-white transition-colors">
-                        info@eabmodel.com
+                        info<span className='numbers-font'>@</span>eabmodel.com
                       </a>
                     </div>
                   </div>
@@ -184,7 +184,7 @@ export default function Contacto() {
                     <div>
                       <h3 className="font-bold">Teléfono</h3>
                       <a href="tel:+123456789" className="text-gray-300 hover:text-white transition-colors">
-                        +1 (234) 567-890
+                      <span className='numbers-font'>+1 (234) 567-890</span>
                       </a>
                     </div>
                   </div>
@@ -194,32 +194,16 @@ export default function Contacto() {
                     <div>
                       <h3 className="font-bold">Dirección</h3>
                       <p className="text-gray-300">
-                        Av. Tecnológica 123<br />
-                        Colonia Innovación<br />
-                        Ciudad de México, CP 12345
+                        Durango, Victoria de Durango<br />
+                        Col. Ignacio Zaragoza<br />
+                        Av Lerdo de Tejada<br />
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-black/30 rounded-lg p-8 backdrop-blur-sm border border-gray-800">
-                <h2 className="text-2xl font-bold mb-6">Horario de atención</h2>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex justify-between">
-                    <span>Lunes - Viernes:</span>
-                    <span>9:00 AM - 6:00 PM</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Sábados:</span>
-                    <span>10:00 AM - 2:00 PM</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Domingos:</span>
-                    <span>Cerrado</span>
-                  </li>
-                </ul>
-              </div>
+            
             </div>
           </div>
         </div>

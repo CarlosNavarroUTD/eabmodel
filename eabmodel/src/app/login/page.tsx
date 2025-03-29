@@ -6,8 +6,11 @@ import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+
+//import { useAuth } from '@/lib/hooks/useAuth';
+//const { checkAuth } = useAuth();
 
 const LoginPage = () => {
     const router = useRouter();
@@ -16,6 +19,7 @@ const LoginPage = () => {
       password: ''
     });
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,39 +32,43 @@ const LoginPage = () => {
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       setError('');
+      setSuccess('');
       setLoading(true);
     
       try {
-        console.log('Enviando solicitud:', formData);
-        
         const response = await fetch('/api/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include', // Important: this allows cookies to be set
           body: JSON.stringify(formData),
         });
     
         const data = await response.json();
-        console.log('Respuesta recibida:', data);
     
         if (!response.ok) {
           throw new Error(data.error || 'Error al iniciar sesión');
         }
     
+        // Store token in both localStorage and set cookie manually as backup
         localStorage.setItem('token', data.token);
-        console.log('Token guardado, redirigiendo...');
         
-        // Forzar la redirección
+        // Asegúrate de establecer la cookie en el cliente también
+        document.cookie = `auth-token=${data.token}; path=/; max-age=604800; SameSite=Strict`;
+        
+        setSuccess('Inicio de sesión exitoso. Redirigiendo...');
+        
+
+
+        // Redirección inmediata al dashboard
         router.push('/dashboard');
-        // Si lo anterior no funciona, prueba con:
-        // window.location.href = '/dashboard';
       } catch (err: unknown) {
         if (err instanceof Error) {
-        console.error('Error durante el login:', err);
-        setError(err.message);
+          console.error('Error durante el login:', err);
+          setError(err.message);
         } else {
-        setError('An unknown error occurred');
+          setError('Ocurrió un error desconocido');
         }
       } finally {
         setLoading(false);
@@ -80,6 +88,12 @@ const LoginPage = () => {
               <Alert variant="destructive" className="mb-4">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            {success && (
+              <Alert variant="default" className="mb-4">
+                <CheckCircle className="h-4 w-4" />
+                <AlertDescription>{success}</AlertDescription>
               </Alert>
             )}
             

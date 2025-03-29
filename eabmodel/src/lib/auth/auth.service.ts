@@ -1,9 +1,13 @@
+
 import { hash, compare } from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
 import { prisma } from '../prisma/client';
 import { UserRegistrationData, UserLoginData } from './types';
+import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const TOKEN_EXPIRY = '24h';
 
 export class AuthService {
   static async register(data: UserRegistrationData) {
@@ -34,7 +38,7 @@ export class AuthService {
       }
     });
 
-    const token = sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
+    const token = sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
 
     return { user, token };
   }
@@ -54,7 +58,7 @@ export class AuthService {
       throw new Error('Invalid credentials');
     }
 
-    const token = sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
+    const token = sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
 
     return {
       user: {
@@ -94,5 +98,79 @@ export class AuthService {
     } catch {
       throw new Error('Invalid token');
     }
+  }
+
+  // Métodos adicionales para gestión de sesión
+
+  // Verificar token desde cookie o encabezado de autorización
+  static async verifySession(req: NextRequest) {
+    try {
+      // Intentar obtener token de cookie
+      const cookieStore = await cookies();
+      const tokenFromCookie = cookieStore.get('auth-token')?.value;
+
+      // Intentar obtener token del encabezado de autorización
+      const authHeader = req.headers.get('authorization');
+      const tokenFromHeader = authHeader?.startsWith('Bearer ') 
+        ? authHeader.substring(7) 
+        : null;
+
+      const token = tokenFromCookie || tokenFromHeader;
+
+      if (!token) {
+        return { authenticated: false, user: null };
+      }
+
+      const user = await this.validateToken(token);
+      return { authenticated: true, user };
+    } catch {
+      return { authenticated: false, user: null };
+    }
+  }
+
+  // Establecer token en cookie para autenticación server-side
+  static setAuthCookie(token: string, res: NextResponse) {
+    res.cookies.set({
+      name: 'auth-token',
+      value: token,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 60 * 60 * 24 // 24 horas en segundos
+    });
+    
+    return res;
+  }
+
+  // Limpiar cookie de autenticación al cerrar sesión
+  static clearAuthCookie(res: NextResponse) {
+    res.cookies.set({
+      name: 'auth-token',
+      value: '',
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 0
+    });
+    
+    return res;
+  }
+
+  // Proteger rutas de la API basado en roles
+  static async requireAuth(req: NextRequest, allowedRoles: string[] = []) {
+    const { authenticated, user } = await this.verifySession(req);
+    
+    if (!authenticated || !user) {
+      return { authenticated: false, user: null };
+    }
+    
+    // Si hay roles permitidos especificados, verificar que el usuario tenga uno de ellos
+    if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+      return { authenticated: true, authorized: false, user };
+    }
+    
+    return { authenticated: true, authorized: true, user };
   }
 }

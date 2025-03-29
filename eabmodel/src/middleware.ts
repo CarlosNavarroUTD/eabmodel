@@ -1,31 +1,38 @@
+// 1. Corrige el middleware - middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { AuthService } from './lib/auth/auth.service';
 
-// Define las rutas protegidas y los roles permitidos
 const protectedRoutes = [
   {
-    path: '/register', // Solo administradores pueden acceder a la página de registro
+    path: '/register',
     allowedRoles: ['ADMIN']
   },
   {
-    path: '/dashboard', // Solo usuarios autenticados (cualquier rol) pueden acceder al dashboard
+    path: '/dashboard', 
     allowedRoles: ['USER', 'ADMIN']
   }
-  // Puedes añadir más rutas según sea necesario
 ];
 
 export async function middleware(request: NextRequest) {
-  // Obtener el token del encabezado o cookie
-  const token = request.cookies.get('auth-token')?.value || request.headers.get('Authorization')?.split('Bearer ')[1];
+  console.log('Middleware intercepted request:', {
+    path: request.nextUrl.pathname
+  });
+
+  // Extracción del token - Priorizar cookie
+  const token = 
+    request.cookies.get('auth-token')?.value || 
+    request.headers.get('Authorization')?.split('Bearer ')[1];
   
+  console.log('Extracted token:', token ? 'Token present' : 'No token found');
+
   // Si no hay token y la ruta está protegida, redirigir al login
   if (!token) {
-    // Verificar si la ruta actual está en la lista de rutas protegidas
     const isProtectedRoute = protectedRoutes.some(route => 
       request.nextUrl.pathname.startsWith(route.path)
     );
     
     if (isProtectedRoute) {
+      console.log('Redirecting to login due to missing token');
       return NextResponse.redirect(new URL('/login', request.url));
     }
     
@@ -36,19 +43,26 @@ export async function middleware(request: NextRequest) {
     // Validar el token y obtener la información del usuario
     const user = await AuthService.validateToken(token);
     
+    console.log('Token validation successful:', {
+      userId: user.id,
+      userRole: user.role
+    });
+
     // Verificar si el usuario tiene acceso a esta ruta
     const currentRoute = protectedRoutes.find(route => 
       request.nextUrl.pathname.startsWith(route.path)
     );
     
     if (currentRoute && !currentRoute.allowedRoles.includes(user.role)) {
-      // Si el usuario no tiene el rol adecuado, redirigir a una página de acceso denegado
+      console.log('Access denied due to insufficient role');
       return NextResponse.redirect(new URL('/access-denied', request.url));
     }
     
     // Si todo está bien, permitir el acceso
     return NextResponse.next();
-  } catch {
+  } catch (error) {
+    console.error('Token validation error:', error);
+
     // Si el token es inválido, eliminar la cookie y redirigir al login
     const response = NextResponse.redirect(new URL('/login', request.url));
     response.cookies.delete('auth-token');
@@ -56,10 +70,10 @@ export async function middleware(request: NextRequest) {
   }
 }
 
-// Configurar en qué rutas se ejecutará el middleware
+// Asegúrate de que el matcher incluya todas las rutas protegidas
 export const config = {
   matcher: [
-    '/dashboard/:path*', 
-    // Puedes añadir más rutas aquí
+    '/dashboard/:path*',
+    '/register',
   ]
 };
