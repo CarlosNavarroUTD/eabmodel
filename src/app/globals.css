@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 0%; /* negro en HSL */
+  --primary: 44 89% 50%; /* #efb810 en HSL */
+  --secondary: 0 0% 33%; /* #545454 en HSL */
+  
+  /* Otras variables necesarias */
+  --foreground: 0 0% 100%;
+  --border: 0 0% 33%;
+  --radius: 0.5rem;
+}
+
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@layer utilities {
+  .animate-spin-orbit1 {
+    transform-origin: center;
+    animation: spin 24s linear infinite;
+  }
+  
+  .animate-spin-orbit2 {
+    transform-origin: center;
+    animation: spin 20s linear infinite reverse;
+  }
+  
+  .animate-spin-orbit3 {
+    transform-origin: center;
+    animation: spin 16s linear infinite;
+  }
+  
+  .animate-spin-orbit4 {
+    transform-origin: center;
+    animation: spin 12s linear infinite reverse;
+  }
+  
+  .animate-spin-orbit5 {
+    transform-origin: center;
+    animation: spin 8s linear infinite;
+  }
+  
+  .animate-spin-orbit6 {
+    transform-origin: center;
+    animation: spin 6s linear infinite reverse;
+  }
+}
+
+
+
+
+
+@layer base {
+  body {
+    font-family: 'Codec Cold', 'Arial', sans-serif;
+  }
+  .numbers-font {
+    font-family: Arial, sans-serif !important;
+  }
+  .form-input {
+    font-family: Arial, sans-serif !important;
+  }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+/*My own fonts*/
+@font-face {
+  font-family: 'Bryndan Write';
+  src: url('/fonts/bryndan-write-font/BryndanWriteBook-nGPM.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* Codec Cold */
+@font-face {
+  font-family: 'Codec Cold';
+  src: url('/fonts/codec/Codec-Cold-Regular-Italic-trial.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Codec Cold';
+  src: url('/fonts/codec/Codec-Cold-Regular-trial.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Codec Cold';
+  src: url('/fonts/codec/Codec-Cold-Bold-trial.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Codec Cold';
+  src: url('/fonts/codec/Codec-Cold-Bold-Italic-trial.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Codec Cold';
+  src: url('/fonts/codec/Codec-Cold-ExtraBold-trial.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Codec Warm */
+@font-face {
+  font-family: 'Codec Warm';
+  src: url('/fonts/codec/Codec-Warm-Regular-Italic-trial.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Codec Warm';
+  src: url('/fonts/codec/Codec-Warm-Regular-trial.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Codec Warm';
+  src: url('/fonts/codec/Codec-Warm-Bold-trial.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Codec Warm';
+  src: url('/fonts/codec/Codec-Warm-Bold-Italic-trial.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@layer base {
+  * {
+    border: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}

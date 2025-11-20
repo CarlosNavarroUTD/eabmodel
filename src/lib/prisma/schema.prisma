@@ -1,0 +1,47 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  password      String
+  name          String?
+  phone         String?
+  position      String?
+  image         String?
+  githubAccount GithubAccount?
+  role          Role           @default(USER)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model GithubAccount {
+  id            String         @id @default(cuid())
+  githubId      String         @unique
+  accessToken   String
+  username      String
+  repositories  Repository[]
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String         @unique
+}
+
+model Repository {
+  id              String        @id @default(cuid())
+  name            String
+  description     String?
+  url             String
+  isPublic        Boolean       @default(true)
+  githubAccount   GithubAccount @relation(fields: [githubAccountId], references: [id])
+  githubAccountId String
+}
