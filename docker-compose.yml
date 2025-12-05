@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  eabmodel-web:
+    build: .
+    container_name: eabmodel-web
+    restart: always
+    ports:
+      - "3005:3000"   
+    env_file:
+      - .env
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

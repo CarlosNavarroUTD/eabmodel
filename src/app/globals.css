@@ -139,6 +139,8 @@
   src: url('/fonts/codec/Codec-Cold-Regular-Italic-trial.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00FF; /* Solo letras */
+
 }
 
 @font-face {
@@ -146,6 +148,7 @@
   src: url('/fonts/codec/Codec-Cold-Regular-trial.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00FF;
 }
 
 @font-face {
@@ -153,6 +156,7 @@
   src: url('/fonts/codec/Codec-Cold-Bold-trial.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00FF; /* Solo letras */
 }
 
 @font-face {
@@ -160,6 +164,7 @@
   src: url('/fonts/codec/Codec-Cold-Bold-Italic-trial.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00FF; /* Solo letras */
 }
 
 @font-face {
@@ -167,6 +172,7 @@
   src: url('/fonts/codec/Codec-Cold-ExtraBold-trial.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00FF; /* Solo letras */
 }
 
 /* Codec Warm */

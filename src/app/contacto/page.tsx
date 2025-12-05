@@ -97,7 +97,7 @@ export default function Contacto() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#efb810]/50 focus:border-transparent"
+                      className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#efb810]/50 focus:border-transparent numbers-font"
                     />
                   </div>
                   
@@ -110,7 +110,7 @@ export default function Contacto() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#efb810]/50 focus:border-transparent"
+                      className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#efb810]/50 focus:border-transparent numbers-font"
                     />
                   </div>
                   
@@ -122,7 +122,7 @@ export default function Contacto() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#efb810]/50 focus:border-transparent"
+                      className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#efb810]/50 focus:border-transparent numbers-font"
                     />
                   </div>
                   

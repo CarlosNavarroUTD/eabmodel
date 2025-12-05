@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "EABMODEL - Soluciones Tecnológicas Inteligentes",
@@ -15,11 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="font-codecCold antialiased bg-background text-white min-h-screen">
+      <body className="font-codecCold antialiased bg-background text-white min-h-screen flex flex-col">
         <Navbar />
-        <div className="pt-16 min-h-[calc(100vh-4rem)]">
+        <div className="pt-16 flex-grow">
           {children}
         </div>
+        <Footer />
       </body>
     </html>
   );
