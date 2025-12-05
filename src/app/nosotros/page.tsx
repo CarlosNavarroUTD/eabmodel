@@ -38,7 +38,7 @@ export default function Nosotros() {
             </div>
           </section>
           
-          {/* Equipo */}
+          {/* Equipo
           <section>
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-[#efb810]">Nuestro Equipo</h2>
@@ -101,7 +101,7 @@ export default function Nosotros() {
               ))}
             </div>
           </section>
-          
+          */}
           {/* Valores */}
           <section className="bg-black/30 rounded-lg p-8 backdrop-blur-sm border border-gray-800">
             <h2 className="text-2xl font-bold text-[#efb810] mb-6">Nuestros Valores</h2>

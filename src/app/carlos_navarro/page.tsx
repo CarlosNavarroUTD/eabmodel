@@ -87,7 +87,7 @@ const Portfolio = () => {
             </div>
           <div className="column">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold">¡Hola! Mi nombre es <span className="text-[#efb810]">Carlos Navarro</span></h1>
-            <p className="text-xl md:text-2xl">Desarrollador Web y Estudiante de Tecnologías de la Información</p>
+            <p className="text-xl md:text-2xl">Especialista en Desarrollo Web y Soluciones Digitales.</p>
           </div>
         </section>
 
@@ -99,8 +99,7 @@ const Portfolio = () => {
           <div className="sub-section flex flex-col md:flex-row gap-5 md:gap-10">
             <div className="column w-full md:w-1/2">
               <p className="text-lg md:text-xl lg:text-2xl text-justify">
-          Tengo amplia experiencia trabajando en equipos ya sea presencial o a distancia. 
-          Busco una oportunidad laboral en la que demostrar mis habilidades y adquirir más experiencia profesional.
+              Soy una persona apasionada por el aprendizaje continuo, con grandes aspiraciones para el futuro y siempre dispuesta a asumir nuevos desafíos que me impulsen a crecer y aportar valor en cada proyecto que emprendo.
               </p>
             </div>
             <div className="column w-full md:w-1/2">

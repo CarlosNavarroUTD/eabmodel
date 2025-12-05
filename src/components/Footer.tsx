@@ -15,17 +15,7 @@ export default function Footer() {
             <p className="text-gray-300 text-sm leading-relaxed">
               Transformamos empresas a través de soluciones tecnológicas inteligentes y modelos de negocio innovadores.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-[#efb810] transition-colors duration-300">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[#efb810] transition-colors duration-300">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[#efb810] transition-colors duration-300">
-                <Twitter className="w-5 h-5" />
-              </a>
-            </div>
+
           </div>
 
           {/* Columna 2: Enlaces rápidos */}
@@ -79,8 +69,8 @@ export default function Footer() {
               </div>
               <div className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-[#efb810] flex-shrink-0 mt-0.5" />
-                <a href="tel:+526181234567" className="text-gray-300 hover:text-[#efb810] transition-colors duration-300 text-sm numbers-font">
-                  +52 618 123 4567
+                <a href="tel:+526183347956" className="text-gray-300 hover:text-[#efb810] transition-colors duration-300 text-sm numbers-font">
+                  +52 618 334 7956
                 </a>
               </div>
               <div className="flex items-start space-x-3">
