@@ -73,8 +73,8 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 text-[#efb810] flex-shrink-0 mt-0.5" />
-                <a href="mailto:contacto@eabmodel.com" className="text-gray-300 hover:text-[#efb810] transition-colors duration-300 text-sm numbers-font">
-                  contacto@eabmodel.com
+                <a href="mailto:carlos@eabmodel.com" className="text-gray-300 hover:text-[#efb810] transition-colors duration-300 text-sm numbers-font">
+                  carlos@eabmodel.com
                 </a>
               </div>
               <div className="flex items-start space-x-3">

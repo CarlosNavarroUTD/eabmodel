@@ -259,17 +259,17 @@ const Portfolio = () => {
           <div className="contact-list max-w-md mx-auto">
             <div className="contact-item flex items-center bg-gray-600 bg-opacity-50 rounded-lg p-3 my-4 relative">
               <Image width={400} height={400}  src="/imgs/whatsapp.png" alt="Teléfono" className="w-9 h-9 mr-3" />
-              <p className="flex-grow m-1 p-1 rounded bg-gray-400 bg-opacity-80 text-xl numbers-font">+52 1 663-205-8150</p>
+              <p className="flex-grow m-1 p-1 rounded bg-gray-400 bg-opacity-80 text-xl numbers-font">+52 1 618-334-7956</p>
               <button 
                 className="bg-gray-600 bg-opacity-70 border-none rounded p-1 ml-1 cursor-pointer hover:bg-gray-600"
-                onClick={() => handleCopy("5216632058150")}
+                onClick={() => handleCopy("5216183347956")}
                 title="Copiar"
               >
                 <Image width={400} height={400}  src="/imgs/copiar.png" alt="Copiar" className="w-6 h-6" />
               </button>
               <button 
                 className="bg-gray-600 bg-opacity-70 border-none rounded p-1 ml-1 cursor-pointer hover:bg-gray-600"
-                onClick={() => handleSend("phone", "5216632058150")}
+                onClick={() => handleSend("phone", "5216183347956")}
                 title="Enviar"
               >
                 <Image width={400} height={400}  src="/imgs/enviar.png" alt="Enviar" className="w-6 h-6" />

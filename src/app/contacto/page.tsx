@@ -173,8 +173,8 @@ export default function Contacto() {
                     <Mail className="text-[#efb810] mr-4 mt-1" />
                     <div>
                       <h3 className="font-bold">Correo electrónico</h3>
-                      <a href="mailto:info@eabmodel.com" className="text-gray-300 hover:text-white transition-colors">
-                        info<span className='numbers-font'>@</span>eabmodel.com
+                      <a href="mailto:carlos@eabmodel.com" className="text-gray-300 hover:text-white transition-colors">
+                        carlos<span className='numbers-font'>@</span>eabmodel.com
                       </a>
                     </div>
                   </div>
@@ -183,8 +183,8 @@ export default function Contacto() {
                     <Phone className="text-[#efb810] mr-4 mt-1" />
                     <div>
                       <h3 className="font-bold">Teléfono</h3>
-                      <a href="tel:+123456789" className="text-gray-300 hover:text-white transition-colors">
-                      <span className='numbers-font'>+1 (234) 567-890</span>
+                      <a href="tel:+526183347956" className="text-gray-300 hover:text-white transition-colors">
+                      <span className='numbers-font'>+52 618 334 7956</span>
                       </a>
                     </div>
                   </div>
@@ -196,7 +196,6 @@ export default function Contacto() {
                       <p className="text-gray-300">
                         Durango, Victoria de Durango<br />
                         Col. Ignacio Zaragoza<br />
-                        Av Lerdo de Tejada<br />
                       </p>
                     </div>
                   </div>
